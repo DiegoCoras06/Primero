@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -91,18 +92,19 @@
             background: rgba(37, 99, 235, 0.1);
         }
 
-        /* Container */
+        /* Container - MODIFICADO PARA OCUPAR TODA LA PANTALLA */
         .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 1rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Cards */
+        /* Cards - MODIFICADO PARA OCUPAR MÁS ESPACIO */
         .card {
             background: var(--white);
             border-radius: 20px;
@@ -660,34 +662,9 @@
                 margin: 0.5rem;
             }
 
-            .card-header {
-                padding: 2rem 1.5rem;
-            }
-
-            .card-header h1 {
-                font-size: 2rem;
-            }
-
+            .card-header,
             .card-body {
                 padding: 1.5rem;
-            }
-
-            .form-group {
-                margin-bottom: 1.25rem;
-            }
-
-            .form-control {
-                padding: 0.75rem;
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-
-            .file-upload-label {
-                padding: 1.5rem;
-            }
-
-            .btn {
-                padding: 0.75rem 1.5rem;
-                font-size: 1rem;
             }
 
             .admin-content {
@@ -708,63 +685,6 @@
                 width: 100%;
                 justify-content: flex-start;
             }
-
-            /* Mobile specific improvements */
-            .card {
-                border-radius: 16px;
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-            }
-
-            .card-header {
-                padding: 2rem 1.5rem;
-            }
-
-            .card-header h1 {
-                font-size: 2rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .card-header p {
-                font-size: 1rem;
-            }
-
-            .form-label {
-                font-size: 0.95rem;
-                margin-bottom: 0.4rem;
-            }
-
-            .form-control {
-                padding: 0.875rem 0.75rem;
-                border-radius: 10px;
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-
-            .file-upload-label {
-                padding: 1.5rem;
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .file-upload-label i {
-                font-size: 2.5rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .btn-primary {
-                padding: 1rem;
-                font-size: 1rem;
-                font-weight: 600;
-                border-radius: 10px;
-            }
-
-            .alert {
-                padding: 0.875rem 1.25rem;
-                font-size: 0.9rem;
-            }
-
-            .image-preview img {
-                max-height: 180px;
-            }
         }
 
         /* Footer */
@@ -781,30 +701,69 @@
             font-weight: 600;
         }
 
-        /* Mobile optimizations */
+        /* Mobile optimizations for registration form */
+        @media (max-width: 768px) {
+            .main-container#registrationView {
+                padding: 0;
+                align-items: stretch;
+            }
+            
+            .card {
+                max-width: 100%;
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .card-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .card-body {
+                padding: 1.5rem;
+                flex-grow: 1;
+            }
+            
+            .form-group {
+                margin-bottom: 1.25rem;
+            }
+            
+            .form-control {
+                padding: 0.875rem;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .file-upload-label {
+                padding: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.875rem;
+            }
+        }
+
+        /* Small mobile optimizations */
         @media (max-width: 480px) {
             .card-header {
                 padding: 1.5rem 1rem;
             }
-
-            .card-header h1 {
-                font-size: 1.75rem;
-            }
-
+            
             .card-body {
                 padding: 1.25rem;
             }
-
+            
             .form-group {
                 margin-bottom: 1rem;
             }
-
+            
             .file-upload-label {
                 padding: 1.25rem;
             }
-
-            .btn-primary {
-                padding: 0.875rem;
+            
+            .btn {
+                padding: 0.75rem;
             }
         }
     </style>
@@ -920,7 +879,7 @@
                         <div class="file-upload-wrapper">
                             <input type="file" class="file-upload-input" id="paymentProof" accept="image/*" required>
                             <label for="paymentProof" class="file-upload-label" id="fileLabel">
-                                <i class="fas fa-cloud-upload-alt"></i>
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem;"></i>
                                 <div>
                                     <div style="font-weight: 600;">Haz clic para subir el voucher</div>
                                     <div style="font-size: 0.875rem; color: var(--gray);">PNG, JPG hasta 5MB</div>
@@ -1247,7 +1206,7 @@
                         `<img src="${e.target.result}" alt="Voucher">`;
                     document.getElementById('fileLabel').classList.add('has-file');
                     document.getElementById('fileLabel').innerHTML = `
-                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                        <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--success);"></i>
                         <div>
                             <div style="font-weight: 600;">${file.name}</div>
                             <div style="font-size: 0.875rem; color: var(--gray);">Click para cambiar</div>
@@ -1279,7 +1238,7 @@
             document.getElementById('imagePreview').innerHTML = '';
             document.getElementById('fileLabel').classList.remove('has-file');
             document.getElementById('fileLabel').innerHTML = `
-                <i class="fas fa-cloud-upload-alt"></i>
+                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem;"></i>
                 <div>
                     <div style="font-weight: 600;">Haz clic para subir el voucher</div>
                     <div style="font-size: 0.875rem; color: var(--gray);">PNG, JPG hasta 5MB</div>
@@ -1474,4 +1433,3 @@
     </script>
 </body>
 </html>
-
