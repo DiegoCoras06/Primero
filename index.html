@@ -1244,6 +1244,32 @@
         .file-remove:hover {
             background: #b91c1c;
         }
+
+        /* Admin login button */
+        .admin-login-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .admin-login-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -1413,7 +1439,7 @@
     </div>
 
     <!-- Registration Form View -->
-    <div class="main-container" id="registrationView" style="display: none;">
+    <div class="main-container" id="registrationView">
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-ticket-alt" style="font-size: 3rem; margin-bottom: 1rem;"></i>
@@ -1601,8 +1627,13 @@
     </div>
 
     <!-- Fullscreen Button -->
-    <button class="fullscreen-btn" id="fullscreenBtn" onclick="enterFullscreen()" style="display: none;">
+    <button class="fullscreen-btn" id="fullscreenBtn" onclick="enterFullscreen()">
         <i class="fas fa-expand"></i>
+    </button>
+
+    <!-- Admin Login Button -->
+    <button class="admin-login-btn" id="adminLoginBtn" onclick="showAdminLogin()">
+        <i class="fas fa-user-shield"></i>
     </button>
 
     <!-- QR Code Library -->
@@ -1620,7 +1651,7 @@
         };
 
         // State
-        let currentView = 'login';
+        let currentView = 'registration';
         let participants = JSON.parse(localStorage.getItem(CONFIG.storageKey)) || [];
         let currentStep = 1;
         const totalSteps = 3;
@@ -1637,6 +1668,9 @@
             if (isMobileDevice()) {
                 document.getElementById('fullscreenBtn').style.display = 'flex';
             }
+            
+            // Show registration form by default
+            showRegistrationForm();
         });
 
         // Check if user is already logged in
@@ -1713,10 +1747,30 @@
             document.getElementById('registrationView').style.display = 'none';
             document.getElementById('adminPanel').classList.add('active');
             document.getElementById('navbar').classList.add('active');
+            document.getElementById('adminLoginBtn').style.display = 'none';
             currentView = 'admin';
             
             loadParticipants();
             updateStats();
+        }
+
+        // Show admin login
+        function showAdminLogin() {
+            document.getElementById('registrationView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'flex';
+            document.getElementById('adminLoginBtn').style.display = 'none';
+            currentView = 'login';
+        }
+
+        // Show registration form
+        function showRegistrationForm() {
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('navbar').classList.remove('active');
+            document.getElementById('registrationView').style.display = 'flex';
+            document.getElementById('adminLoginBtn').style.display = 'flex';
+            currentView = 'registration';
+            resetForm();
         }
 
         // Update statistics
@@ -2015,14 +2069,6 @@
             }
         }
 
-        // Show registration form
-        function showRegistrationForm() {
-            document.getElementById('adminPanel').classList.remove('active');
-            document.getElementById('navbar').classList.remove('active');
-            document.getElementById('registrationView').style.display = 'flex';
-            resetForm();
-        }
-
         // Show image modal
         function showImageModal(imageSrc) {
             document.getElementById('modalImage').src = imageSrc;
@@ -2039,10 +2085,11 @@
             localStorage.removeItem(CONFIG.sessionKey);
             document.getElementById('adminPanel').classList.remove('active');
             document.getElementById('navbar').classList.remove('active');
-            document.getElementById('loginView').style.display = 'flex';
+            document.getElementById('registrationView').style.display = 'flex';
+            document.getElementById('adminLoginBtn').style.display = 'flex';
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
-            currentView = 'login';
+            currentView = 'registration';
         }
 
         // Handle URL hash
@@ -2052,7 +2099,7 @@
                 // Show registration form directly without login
                 document.getElementById('loginView').style.display = 'none';
                 document.getElementById('registrationView').style.display = 'flex';
-                currentView = 'form';
+                currentView = 'registration';
                 
                 // If mobile device, show fullscreen button
                 if (isMobileDevice()) {
