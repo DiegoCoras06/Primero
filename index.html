@@ -91,19 +91,18 @@
             background: rgba(37, 99, 235, 0.1);
         }
 
-        /* Container - MODIFICADO PARA OCUPAR TODA LA PANTALLA */
+        /* Container */
         .main-container {
-            width: 100%;
-            max-width: 100%;
-            margin: 0;
-            padding: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Cards - MODIFICADO PARA OCUPAR MÁS ESPACIO */
+        /* Cards */
         .card {
             background: var(--white);
             border-radius: 20px;
@@ -653,16 +652,11 @@
             }
 
             .main-container {
-                padding: 0;
+                padding: 1rem;
             }
 
             .card {
                 max-width: 100%;
-                margin: 0;
-                border-radius: 0;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
             }
 
             .card-header,
@@ -696,79 +690,12 @@
             padding: 2rem;
             color: rgba(255, 255, 255, 0.8);
             margin-top: 2rem;
-            display: none; /* Footer oculto */
         }
 
         .footer a {
             color: var(--white);
             text-decoration: none;
             font-weight: 600;
-        }
-
-        /* Mobile optimizations for registration form */
-        @media (max-width: 768px) {
-            .main-container#registrationView {
-                padding: 0;
-                align-items: stretch;
-            }
-            
-            .card {
-                max-width: 100%;
-                margin: 0;
-                border-radius: 0;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .card-header {
-                padding: 2rem 1.5rem;
-            }
-            
-            .card-body {
-                padding: 1.5rem;
-                flex-grow: 1;
-            }
-            
-            .form-group {
-                margin-bottom: 1.25rem;
-            }
-            
-            .form-control {
-                padding: 0.875rem;
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-            
-            .file-upload-label {
-                padding: 1.5rem;
-            }
-            
-            .btn {
-                padding: 0.875rem;
-            }
-        }
-
-        /* Small mobile optimizations */
-        @media (max-width: 480px) {
-            .card-header {
-                padding: 1.5rem 1rem;
-            }
-            
-            .card-body {
-                padding: 1.25rem;
-            }
-            
-            .form-group {
-                margin-bottom: 1rem;
-            }
-            
-            .file-upload-label {
-                padding: 1.25rem;
-            }
-            
-            .btn {
-                padding: 0.75rem;
-            }
         }
     </style>
 </head>
@@ -901,7 +828,9 @@
                 </form>
             </div>
         </div>
-        <!-- Footer eliminado -->
+        <div class="footer">
+            <p>&copy; 2024 Rapi Rifa - Todos los derechos reservados</p>
+        </div>
     </div>
 
     <!-- Admin Panel -->
@@ -1435,3 +1364,4 @@
     </script>
 </body>
 </html>
+
