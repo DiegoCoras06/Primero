@@ -96,7 +96,7 @@
             width: 100%;
             max-width: 100%;
             margin: 0;
-            padding: 1rem;
+            padding: 0;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -653,12 +653,16 @@
             }
 
             .main-container {
-                padding: 1rem;
+                padding: 0;
             }
 
             .card {
                 max-width: 100%;
-                margin: 0.5rem;
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
             }
 
             .card-header,
@@ -692,6 +696,7 @@
             padding: 2rem;
             color: rgba(255, 255, 255, 0.8);
             margin-top: 2rem;
+            display: none; /* Footer oculto */
         }
 
         .footer a {
@@ -896,9 +901,7 @@
                 </form>
             </div>
         </div>
-        <div class="footer">
-            <p>&copy; 2024 Rapi Rifa - Todos los derechos reservados</p>
-        </div>
+        <!-- Footer eliminado -->
     </div>
 
     <!-- Admin Panel -->
